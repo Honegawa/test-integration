@@ -1,0 +1,15 @@
+.book-list-actions{
+    display: flex;
+    gap: 10px;
+}
+
+.book-list-sheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+
+.create-button {
+    width: 100px;
+}
