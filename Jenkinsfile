@@ -18,7 +18,7 @@ pipeline {
             }
         }   
         
-        stage('Install Dependencies') {
+        stage('Install Dependencies Back') {
             
             steps {
                 dir('./App-Test-Back') {
@@ -27,7 +27,7 @@ pipeline {
             }
         }
         
-        stage('Run Tests') {
+        stage('Run Tests Back') {
             
             steps {
                 dir('./App-Test-Back') {
@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install Dependencies Front') {
             
             steps {
                 dir('./App-Test-Front') {
