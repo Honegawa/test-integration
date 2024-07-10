@@ -1,8 +1,6 @@
-import { Model } from "sequelize";
 import authorCtrl from "../../controllers/author.controller.js";
 import { Author } from "../../models/index.js";
 import { jest } from "@jest/globals";
-import { validationResult } from "express-validator";
 
 jest.mock("../../models/index.js");
 

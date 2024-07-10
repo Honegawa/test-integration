@@ -1,17 +1,22 @@
 pipeline {
     agent any
     
+    parameters {
+        stashedFile '.env'
+    }
+
     tools {
         nodejs 'NodeJS-22.4.0'
     }
 
     stages {
-        stage('Git Checkout') {
-            
-            steps {
-                git branch: 'main', url: 'https://github.com/Honegawa/test-integration.git'
+        stage('Import .env') {
+           steps {
+                dir('./App-Test-Back') {
+                    unstash '.env'
+                }
             }
-        }
+        }   
         
         stage('Install Dependencies') {
             
