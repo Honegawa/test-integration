@@ -35,5 +35,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Install Dependencies') {
+            
+            steps {
+                dir('./App-Test-Front') {
+                    bat 'npm install'    
+                }
+            }
+        }
     }
 }
