@@ -25,10 +25,11 @@ const getById = async (req, res) => {
   }
 };
 
-const create = async (req, res, next) => {
+const create = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors);
       return res.status(400).json({
         errors: errors.array(),
       });
@@ -39,7 +40,7 @@ const create = async (req, res, next) => {
     const author = await Author.create({ firstname, lastname });
     res.status(201).json({ message: "Author has been created!", author });
   } catch (error) {
-    next(error);
+    res.status(500).json({ error: "Error in creating author" });
   }
 };
 
@@ -62,8 +63,9 @@ const updateById = async (req, res) => {
 
     await author.update({ firstname, lastname }, { new: true });
 
-    res.status(200).json({ message: "Author has been updated", author });
+    res.status(200).json({ message: "Author has been updated", author: author.dataValues });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Error in updating author" });
   }
 };
