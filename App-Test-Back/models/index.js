@@ -27,7 +27,11 @@ Author.hasMany(Book, {
 });
 Book.belongsTo(Author);
 
-await sequelize.sync({ alter: true, force: true });
-console.log("Sync ok");
+try {
+  await sequelize.sync({ alter: true, force: true });
+  console.log("Sync ok");
+} catch (error) {
+  console.log(error);
+}
 
 export { Author, Book };
