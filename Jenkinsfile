@@ -10,6 +10,13 @@ pipeline {
     }
 
     stages {
+        stage('Git Checkout') {
+            
+            steps {
+                git branch: 'test-jenkinsfile', url: 'https://github.com/Honegawa/test-integration.git'
+            }
+        }
+
         stage('Import .env') {
            steps {
                 dir('./App-Test-Back') {
@@ -18,7 +25,7 @@ pipeline {
             }
         }   
         
-        stage('Install Dependencies Back') {
+        stage('Install Dependencies') {
             
             steps {
                 dir('./App-Test-Back') {
@@ -27,7 +34,7 @@ pipeline {
             }
         }
         
-        stage('Run Tests Back') {
+        stage('Run Tests') {
             
             steps {
                 dir('./App-Test-Back') {
@@ -35,13 +42,24 @@ pipeline {
                 }
             }
         }
-
-        stage('Install Dependencies Front') {
-            
-            steps {
-                dir('./App-Test-Front') {
-                    bat 'npm install'    
-                }
+    }
+    
+    post {
+        success {
+            script {
+                bat  """
+                    echo "Merging ${source} to ${target}"
+                    git fetch
+                    git config --global user.email "taing.steven@outlook.fr"
+                    git config --global user.name "Steven Taing"
+                    git checkout ${target}
+                    git pull origin ${target}
+                    git merge origin/${source}
+                    git push origin ${target} 
+                """
+            }
+            always {
+                cleanWs()
             }
         }
     }
