@@ -10,13 +10,6 @@ pipeline {
     }
 
     stages {
-        stage('Git Checkout') {
-            
-            steps {
-                git branch: 'test-jenkinsfile', url: 'https://github.com/Honegawa/test-integration.git'
-            }
-        }
-
         stage('Import .env') {
            steps {
                 dir('./App-Test-Back') {
