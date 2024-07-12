@@ -50,8 +50,6 @@ pipeline {
                 bat  """
                     echo "Merging ${source} to ${target}"
                     git fetch
-                    git config --global user.email "taing.steven@outlook.fr"
-                    git config --global user.name "Steven Taing"
                     git checkout ${target}
                     git pull origin ${target}
                     git merge origin/${source}
