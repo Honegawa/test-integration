@@ -11,5 +11,3 @@ export const ENV = {
   DB_NAME: process.env.DB_NAME,
   DB_TYPE: process.env.DB_TYPE
 };
-
-console.log(ENV)
